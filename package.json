@@ -1,0 +1,45 @@
+{
+  "name": "claude-agents-just-bash",
+  "version": "1.0.0",
+  "description": "Run Claude Code / Anthropic Agents SDK within a just-bash environment.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "claude-sandbox": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "echo \"No tests yet\" && exit 0",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pisanvs/claude-agents-just-bash.git"
+  },
+  "keywords": ["claude", "anthropic", "agents", "sandbox", "bash", "just-bash"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/pisanvs/claude-agents-just-bash/issues"
+  },
+  "homepage": "https://github.com/pisanvs/claude-agents-just-bash#readme",
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.76",
+    "commander": "^14.0.3",
+    "just-bash": "^2.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
