@@ -8,8 +8,8 @@ import {
   createSdkMcpServer,
   tool,
   type McpSdkServerConfigWithInstance,
+  z,
 } from "@anthropic-ai/claude-agent-sdk";
-import { z } from "zod/v4";
 import type { Bash } from "just-bash";
 
 /**

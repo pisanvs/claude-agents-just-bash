@@ -73,7 +73,7 @@ export ANTHROPIC_API_KEY=sk-ant-...
 claude-sandbox "Write a TypeScript function that sorts an array by multiple criteria"
 
 # Mount a real project directory (reads from disk, writes stay in-memory)
-claude-sandbox run "Add JSDoc comments to all functions" --root ./src --export ./output
+claude-sandbox run "Add JSDoc comments to all functions" --root ./src --output-dir ./output
 
 # Export sandbox files after agent finishes
 claude-sandbox run "Generate a REST API with tests" \
@@ -297,7 +297,7 @@ Run Options:
 
 ## Requirements
 
-- Node.js 18+
+- Node.js 20+
 - An Anthropic API key (`ANTHROPIC_API_KEY` environment variable)
 - The `@anthropic-ai/claude-agent-sdk` package is included as a dependency and brings everything needed — no separate `claude` CLI installation is required
 

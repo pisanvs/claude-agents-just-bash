@@ -3,7 +3,7 @@
  */
 
 import { promises as fsPromises } from "node:fs";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve, sep } from "node:path";
 import type { Bash } from "just-bash";
 import type { ExportedFiles } from "./types.js";
 
@@ -102,6 +102,8 @@ export async function writeFilesToDisk(
   outputDir: string,
   options: { stripPrefix?: string } = {}
 ): Promise<void> {
+  const resolvedOutputDir = resolve(outputDir);
+
   for (const [filePath, content] of Object.entries(exportedFiles.files)) {
     let relativePath = filePath;
 
@@ -115,7 +117,26 @@ export async function writeFilesToDisk(
 
     if (!relativePath) continue;
 
-    const destPath = join(outputDir, relativePath);
+    // Reject any attempt to traverse outside the output directory
+    const segments = relativePath.split(/[\\/]+/);
+    if (segments.some((segment) => segment === "..")) {
+      throw new Error(
+        `Refusing to write file with unsafe relative path containing '..': ${relativePath}`
+      );
+    }
+
+    const destPath = resolve(resolvedOutputDir, relativePath);
+
+    // Ensure the resolved destination path is within the output directory
+    if (
+      destPath !== resolvedOutputDir &&
+      !destPath.startsWith(resolvedOutputDir + sep)
+    ) {
+      throw new Error(
+        `Refusing to write file outside of output directory: ${destPath}`
+      );
+    }
+
     const destDir = dirname(destPath);
 
     if (destDir) {

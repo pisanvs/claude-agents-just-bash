@@ -114,6 +114,11 @@ export class SandboxedAgent {
         // Model selection
         ...(this.claudeOptions.model ? { model: this.claudeOptions.model } : {}),
 
+        // API key (optional, if provided)
+        ...(this.claudeOptions.apiKey
+          ? { apiKey: this.claudeOptions.apiKey }
+          : {}),
+
         // System prompt
         ...(this.claudeOptions.systemPrompt
           ? { systemPrompt: this.claudeOptions.systemPrompt }
