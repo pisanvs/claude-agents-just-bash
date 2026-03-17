@@ -56,6 +56,7 @@ export class SandboxedAgent {
       ...(sandbox.customCommands
         ? { customCommands: sandbox.customCommands }
         : {}),
+      ...(sandbox.commands ? { commands: sandbox.commands } : {}),
     });
 
     // Register any AST transform plugins

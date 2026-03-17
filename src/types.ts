@@ -4,6 +4,7 @@
 
 import type {
   BashOptions,
+  CommandName,
   CustomCommand,
   IFileSystem,
   NetworkConfig,
@@ -82,8 +83,9 @@ export interface SandboxOptions {
   /**
    * Restrict which built-in bash commands are available.
    * If not provided, all built-in commands are available.
+   * Use the `CommandName` type (re-exported from this package) for valid values.
    */
-  commands?: string[];
+  commands?: CommandName[];
 }
 
 /**
@@ -184,6 +186,7 @@ export interface ExportedFiles {
 
 export type {
   BashOptions,
+  CommandName,
   CustomCommand,
   IFileSystem,
   NetworkConfig,

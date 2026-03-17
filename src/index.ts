@@ -96,6 +96,7 @@ export type {
   AgentOptions,
   AgentDefinition,
   CustomCommand,
+  CommandName,
   IFileSystem,
   NetworkConfig,
   JavaScriptConfig,
