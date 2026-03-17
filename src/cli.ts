@@ -186,7 +186,19 @@ function parseOptions(opts: Record<string, unknown>): {
   if (opts.maxBudget) claude.maxBudgetUsd = opts.maxBudget as number;
 
   // Session persistence (default off for sandboxed runs)
-  claude.persistSession = false;
+  if (opts.persist && opts.noPersist) {
+    console.error("Error: cannot use both --persist and --no-persist flags at the same time");
+    process.exit(1);
+  }
+
+  if (opts.persist) {
+    claude.persistSession = true;
+  } else if (opts.noPersist) {
+    claude.persistSession = false;
+  } else {
+    // Default behavior: do not persist sessions for sandboxed runs
+    claude.persistSession = false;
+  }
 
   return { sandbox, claude };
 }
